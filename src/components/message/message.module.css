@@ -1,0 +1,46 @@
+.message_container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    width: 100%;
+    height: 100vh;
+}
+.messasge_field {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    padding-right: 10px;
+    height: 75%;
+    overflow-y: scroll;
+    color: #f2f2f2;
+}
+.messasge_field::-webkit-scrollbar {
+    background-color: #222;
+    width: 5px;
+}
+.messasge_field::-webkit-scrollbar-thumb {
+    background-color: #7feebe;
+}
+.input_box {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 75%;
+    padding: 20px;
+}
+.avatar {
+    border-right: 2px solid #111;
+    height: 100vh;
+}
+.avatar div {
+    display: flex;
+    border-bottom: 2px solid #111;
+    padding: 10px;
+    align-items: center;
+}
+.avatar div h3 {
+    color: #f2f2f2;
+    margin-left: 10px;
+}
+.welcome img{
+    width: 100%;
+}
