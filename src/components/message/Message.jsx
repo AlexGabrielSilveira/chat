@@ -1,17 +1,10 @@
 'use client'
-import { styled } from '@mui/material/styles';
-import Badge from '@mui/material/Badge';
-import Box from '@mui/material/Box';
-import Input from '@mui/material/Input';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormControl from '@mui/material/FormControl';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import Avatar from '@mui/material/Avatar';
 
 import styles from './message.module.css'
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import { BiImageAdd } from 'react-icons/bi'
+import { BiChevronDown } from 'react-icons/bi'
 
 export default function Message() {
     const[messages, setMessages] = useState([])
@@ -59,91 +52,34 @@ export default function Message() {
         },
 
     ]
-    const StyledBadge = styled(Badge)(({ theme }) => ({
-        '& .MuiBadge-badge': {
-            backgroundColor: '#7feebe',
-            color: '#7feebe',
-            boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-            '&::after': {
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                borderRadius: '50%',
-                animation: 'ripple 2s infinite ease-in-out',
-                border: '1px solid currentColor',
-                content: '""',
-            },
-            },
-            '@keyframes ripple': {
-            '0%': {
-                transform: 'scale(.8)',
-                opacity: 1,
-            },
-            '100%': {
-                transform: 'scale(1.2)',
-                background: '#1bb673',
-                opacity: 1,
-            },
-            },
-        }));
     return (
         <>
         <div className={styles.message_container}>
             <div className={styles.avatar}>
+                <h2 className={styles.username}> uDaanilo <BiChevronDown /></h2>
                 {avatars.map(avatar => (
                     // eslint-disable-next-line react/jsx-key
-                    <div>
-                        <StyledBadge
-                            overlap="circular"
-                            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                            variant="dot"
-                        ></StyledBadge>
+                    <div className={styles.avatar_container}>
                         <Avatar alt={avatar.name} src={avatar.img} />
-                        <h3>{avatar.name}</h3>
-                        
+                        <div className={styles.user_infos}>
+                            <h4>{avatar.name}</h4>
+                            <p>active 1m ago</p>
+                        </div>
                     </div>
                 ))}
             </div>
-            {messages.length == 0 ? (
-                <div className={styles.welcome}>
-                    <Image src="/welcome.png" alt='welcome' width="1080" height="720"/>
+            <div className={styles.messasge_field }>
+            {messages.map((message) => (
+                <div key={message.msg}>
+                    <h1>{message.msg}</h1> 
+                    <p>{message.createdAt}</p>
                 </div>
-            ) : 
-            (
-                <div className={styles.messasge_field }>
-                {messages.map((message) => (
-                    <div key={message.msg}>
-                        <h1>{message.msg}</h1> 
-                        <p>{message.createdAt}</p>
-                    </div>
-                ))}
+            ))}
             </div>
-            )}
         </div>
         <div className={styles.input_box}>
-            <Box width="100%">
-            <FormControl variant="standard" fullWidth>
-                <InputLabel htmlFor="input-with-icon-adornment">
-                </InputLabel>
-                <Input 
-                onKeyDown={getMessage}
-                placeholder='Digite algo ...'
-                sx={{
-                    bgcolor: '#7feebe',
-                    border : 1,
-                    borderRadius: 2
-                }}
-                id="input-with-icon-adornment"
-                endAdornment={
-                    <InputAdornment position="start">
-                        <AddPhotoAlternateIcon />
-                    </InputAdornment>
-                }
-                />
-            </FormControl>
-            </Box>
+            <input  placeholder='Message...' onKeyDown={getMessage}/>
+            <BiImageAdd />
         </div>
         </>
     )
